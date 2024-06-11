@@ -1,3 +1,5 @@
+import requests as req
+
 def api_infomercado_1(dataset):
     '''
     ARGUMENTOS
@@ -14,3 +16,22 @@ def api_infomercado_1(dataset):
     data_filter = r.json()['result']
     j = list(data_filter)
     return j
+
+api_infomercado_1("package_list")
+
+def api_infomercado_2(item_infomercado):
+    '''
+    ARGUMENTOS
+    item_infomercado(string): Nome da planilha que será buscada no infomercado.
+
+    DICAS
+    (api_infomercado_1 devolve uma lista com os todos os nomes das planilhas, a intenção é adquirir o conteúdo das planilhas a partir da api_infomercado_1)
+    '''
+        
+    url1 = 'https://dadosabertos.ccee.org.br/api/3/action/package_show?id=' + item_infomercado
+    r = req.get(url1)
+    print(r)
+    data_filter = r.json()['result']['resources'][0]['id']
+    return str(data_filter)
+
+api_infomercado_2("acl_eol")
